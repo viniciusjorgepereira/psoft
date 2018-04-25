@@ -21,8 +21,20 @@
                 poderá enviar e/ou apagar suas mensagens.
             </p>
             <br>
-            <div id="listagem"></div>
-            <script src="./client.js"></script>
+            <div id="listagem" style="border: 20px"></div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Título" id="title">    
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Mensagem" id="msg">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Author" id="author">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="submit()">Enviar</button>
+                </div>
+            </div>
         </div>
     </div>
+<script src="./client.js"></script>
 </body>

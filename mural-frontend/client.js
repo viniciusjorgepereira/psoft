@@ -1,4 +1,7 @@
-const listagem_view = document.getElementById('listagem');
+const listagem_view = document.getElementById("listagem");
+const title = document.getElementById("title");
+const msg = document.getElementById("msg");
+const author = document.getElementById("author");
 
 const mensagens = [];
 
@@ -15,12 +18,23 @@ function update_view() {
         </div>
     </div><br>`).join("\n");
     listagem_view.innerHTML = items;
-}
+};
+
+function submit() {
+    fetch('http://150.165.85.16:9900/api/msgs', {
+        method: 'post',
+        body: JSON.stringify({
+            title: title.value, 
+            msg: msg.value, 
+            author: author.value, 
+            credentials:"vjsilva:avengers"})
+    })
+    .then(dado => dado.json());
+};
 
 fetch('http://150.165.85.16:9900/api/msgs')
 .then(r => r.json())
 .then(data => {
     Object.assign(mensagens, data);
     update_view();
-})
-
+});
