@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="bg-light" style="background-image: url(https://www.jinnah.edu/wp-content/uploads/2014/06/38.jpg)">
     <div class="container">
+        <br>
         <div class="jumbotron">
-            <h1 class="display-4">Mural, Projeto de Software!</h1>
+            <h1 class="display-4">
+                Mural
+                <span class="badge badge-primary">PSOFT</span>
+            </h1>
             <hr class="my-4">
             <p class="lead">
                 Este site é um mural simples em que qualquer usuário 
@@ -21,19 +25,30 @@
                 poderá enviar e/ou apagar suas mensagens.
             </p>
             <br>
-            <div id="listagem" style="border: 20px"></div>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Título" id="title">    
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary" onclick="show()">Adicionar</button>
+                <button type="button" class="btn btn-secondary">Pesquisar</button>
+                <button type="button" class="btn">Remover</button>
             </div>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Mensagem" id="msg">
-            </div>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Author" id="author">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="submit()">Enviar</button>
+            <br>
+            <hr class="my-4">
+            <div id="add" hidden="false">
+                <h5>Adicionar uma nova mensagem</h5>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Título" id="title">    
                 </div>
+                <div class="input-group mb-3">
+                    <textarea class="form-control" rows="2" placeholder="Mensagem" id="msg"></textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Autor" id="author">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" onclick="submit()" onclick="show()">Enviar</button>
+                    </div>
+                </div>
+                <hr class="my-4">
             </div>
+            <div id="listagem"></div>
         </div>
     </div>
 <script src="./client.js"></script>
