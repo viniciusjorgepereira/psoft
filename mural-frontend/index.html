@@ -26,8 +26,9 @@
             </p>
             <br>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary" onclick="show()">Adicionar</button>
-                <button type="button" class="btn btn-secondary">Pesquisar</button>
+                <button type="button" class="btn btn-success" onclick="update_msg();">Mensagens</button>
+                <button type="button" class="btn btn-primary" onclick="show(add)">Adicionar</button>
+                <button type="button" class="btn btn-secondary" onclick="show(search)">Pesquisar</button>
                 <button type="button" class="btn">Remover</button>
             </div>
             <br>
@@ -35,7 +36,7 @@
             <div id="add" hidden="false">
                 <h5>Adicionar uma nova mensagem</h5>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Título" id="title">    
+                    <input type="text" class="form-control" placeholder="Título" id="subject">    
                 </div>
                 <div class="input-group mb-3">
                     <textarea class="form-control" rows="2" placeholder="Mensagem" id="msg"></textarea>
@@ -43,9 +44,21 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Autor" id="author">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" onclick="submit()" onclick="show()">Enviar</button>
+                        <button 
+                            class="btn btn-outline-primary" 
+                            type="button" 
+                            onclick="submit(); show(add); clearvalue(subject); clearvalue(msg); clearvalue(author)">
+                            Enviar
+                        </button>
                     </div>
                 </div>
+                <hr class="my-4">
+            </div>
+            <div id="search" hidden="false">
+                <h5>Realizar pesquisas</h5>
+                <textarea class="form-control" rows="2" placeholder="Informe o título, a mensagem ou o autor" id="searchInput"></textarea>
+                <br>
+                <button class="btn btn-secondary" onclick="searching(searchInput); show(search);">Procurar</button>
                 <hr class="my-4">
             </div>
             <div id="listagem"></div>
