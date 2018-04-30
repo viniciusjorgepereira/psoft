@@ -14,6 +14,7 @@
     <div class="container-fluid">
         <br>
         <div class="jumbotron">
+            <!--CABECALHO-->
             <h1 class="display-4">
                 Mural
                 <span class="badge badge-primary">PSOFT</span>
@@ -21,22 +22,33 @@
             <hr class="my-4">
             <p class="lead">
                 Este site é um mural simples em que qualquer usuário 
-                pode postar mensagens livremente.
+                pode postar, pesquisar e remover mensagens livremente.
             </p>
             <br>
+
+            <!--MENU-->
             <div class="btn-group" role="group">
                 <button title="Atualizar mensagens" type="button" class="btn btn-success" 
-                onclick="update_msg(); clearvalue(searchInput)">
+                onclick="update_msg(); clearvalue(searchInput); clearvalue(deleteInput); set_hidden(add); set_hidden(search); set_hidden(del);">
                     Mensagens
                 </button>
-                <button type="button" class="btn btn-primary" onclick="show(add)">
+                <button type="button" class="btn btn-primary" 
+                onclick="show(add); set_hidden(del); set_hidden(search);">
                     Adicionar
                 </button>
-                <button type="button" class="btn btn-secondary" onclick="show(search)">Pesquisar</button>
-                <button type="button" class="btn" onclick="show(del)">Remover</button>
+                <button type="button" class="btn btn-secondary" 
+                onclick="show(search); set_hidden(add); set_hidden(del);">
+                    Pesquisar
+                </button>
+                <button type="button" class="btn" 
+                onclick="show(del); update_view(localmessages()); set_hidden(add); set_hidden(search);">
+                    Remover
+                </button>
             </div>
             <br>
             <hr class="my-4">
+
+            <!--ADICIONAR MENSAGEM-->
             <div id="add" hidden="false">
                 <h5>Adicionar uma nova mensagem</h5>
                 <div class="input-group mb-3">
@@ -58,6 +70,8 @@
                 </div>
                 <hr class="my-4">
             </div>
+
+            <!--PESQUISA-->
             <div id="search" hidden="false">
                 <h5>Realizar pesquisas</h5>
                 <textarea class="form-control" rows="2" placeholder="Informe o título, a mensagem ou o autor" id="searchInput"></textarea>
@@ -65,6 +79,8 @@
                 <button class="btn btn-secondary" onclick="searching(searchInput); show(search);">Procurar</button>
                 <hr class="my-4">
             </div>
+
+            <!--REMOVER MENSAGEM-->
             <div id="del" hidden="true">
                 <h5>Remover uma mensagem</h5>
                 <div class="input-group">
@@ -80,6 +96,8 @@
                 </div>
                 <hr class="my-4">
             </div>
+
+            <!--LISTA DE MENSAGENS-->
             <div id="listagem" class="row justify-content-md-auto"></div>
         </div>
     </div>

@@ -18,10 +18,10 @@ function update_view(array) {
             <h5 class="card-title text-primary">${e.title}</h5> 
             <p class="card-text">${e.msg}</p> 
             <p class="card-text">
-                <small class="text-muted">@${e.author}</small>
+                <small class="text-muted">@${e.author}, </small>
                 <small class="text-muted font-italic">
-                    , enviado às ${new Date(e.created_at).toLocaleTimeString()}
-                    , em ${new Date(e.created_at).toLocaleDateString()} 
+                    enviado às ${new Date(e.created_at).toLocaleTimeString()}, 
+                    em ${new Date(e.created_at).toLocaleDateString()} &nbsp;&nbsp;
                 </small>
             </p>
         </div>
@@ -47,6 +47,12 @@ function show(tag) {
     tag.hidden = !tag.hidden;
 }
 
+function set_hidden(tag){
+    if (tag.hidden == false) {
+        tag.hidden = true;
+    }
+}
+
 function clearvalue(tag) {
     tag.value = '';
 }
@@ -67,9 +73,7 @@ function searching(tag) {
 }
 
 function localmessages() {
-    return mensagens.filter(a => 
-        a.frontend == 'vjsilva'
-    );
+    return mensagens.filter(a => a.frontend == 'vjsilva');
 }
 
 function remove (tag) {
@@ -85,5 +89,6 @@ function remove (tag) {
         })
         .then(a => localmessages);
         update_msg();
+        update_view(localmessages);
     }
 }
