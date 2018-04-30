@@ -27,7 +27,7 @@ function update_view(array) {
         </div>
     </div>
     <br>`).join("\n");
-    listagem_view.innerHTML = items; 
+    listagem_view.innerHTML = items;
 };
 
 function submit() {
@@ -45,6 +45,7 @@ function submit() {
 
 function show(tag) {
     tag.hidden = !tag.hidden;
+    //scroll(tag);
 }
 
 function set_hidden(tag){
@@ -90,5 +91,16 @@ function remove (tag) {
         .then(a => localmessages);
         update_msg();
         update_view(localmessages);
+    }
+}
+
+function scroll(tag) {
+    let diff=(tag.offsetTop-window.scrollY)/8;
+    if (Math.abs(diff)>1) {
+        window.scrollTo(0, (window.scrollY+diff))
+        clearTimeout(window._TO);
+        window._TO=setTimeout(scroll, 20, tag);
+    } else {
+        window.scrollTo(0, tag.offsetTop);
     }
 }
