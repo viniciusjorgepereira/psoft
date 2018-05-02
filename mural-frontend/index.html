@@ -29,33 +29,28 @@
 
             <!--MENU-->
             <div class="btn-group" role="group">
-                <button title="Atualizar mensagens" type="button" class="btn btn-success" 
+                <button title="Atualizar mensagens" type="button" class="btn btn-secondary" 
                 onclick="update_msg(); clearvalue(searchInput); clearvalue(deleteInput); set_hidden(add); set_hidden(search); set_hidden(del); set_hidden(log);">
                     Mensagens
                 </button>
-                <button type="button" class="btn btn-primary" 
+                <button type="button" class="btn btn-secondary" 
                 onclick="show(add); set_hidden(del); set_hidden(search); set_hidden(log);">
                     Adicionar
                 </button>
+            </div>
                 <button type="button" class="btn btn-secondary" 
                 onclick="show(search); set_hidden(add); set_hidden(del); set_hidden(log);">
                     Pesquisar
                 </button>
-                <button type="button" class="btn" 
+                <button type="button" class="btn btn-secondary" 
                 onclick="show(del); update_view(localmessages()); set_hidden(add); set_hidden(search); set_hidden(log);">
                     Remover
                 </button>
-            </div>
-            <button class="btn btn" onclick="show(log); set_hidden(add); set_hidden(del); set_hidden(search); logout();">
+            <button class="btn btn-secondary" onclick="show(log); set_hidden(add); set_hidden(del); set_hidden(search); logout();">
                     <span id="nameview"></span>                
             </button>
             <br>
             <hr class="my-4">
-
-            <!--BOTAO-->
-            <div style="position: fixed; bottom: 5px; right: 25px;">
-                <i class="material-icons md-48">arrow_upward</i>
-            </div>
 
             <!--LOGIN-->
             <div id="log" hidden="false">

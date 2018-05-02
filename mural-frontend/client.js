@@ -108,13 +108,13 @@ function remove (tag) {
             method: 'DELETE',
             body: msgs
         })
-        .then(localmessages())
-        .then(update_msg());
+        .then(a => localmessages())
+        .then(a => update_msg());
         show(document.getElementById('del'));
     }
 }
 
-function scroll(tag) {
+function scrol(tag) {
     let diff=(tag.offsetTop-window.scrollY)/8;
     if (Math.abs(diff)>1) {
         window.scrollTo(0, (window.scrollY+diff))
