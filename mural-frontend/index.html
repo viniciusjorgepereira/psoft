@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="bg-light" style="background-image: url(https://www.jinnah.edu/wp-content/uploads/2014/06/38.jpg)">
     <div class="container-fluid">
@@ -45,21 +46,26 @@
                     Remover
                 </button>
             </div>
-            <button class="btn btn-warning" onclick="show(log); set_hidden(add); set_hidden(del); set_hidden(search); logout();">
+            <button class="btn btn" onclick="show(log); set_hidden(add); set_hidden(del); set_hidden(search); logout();">
                     <span id="nameview"></span>                
             </button>
             <br>
             <hr class="my-4">
 
+            <!--BOTAO-->
+            <div style="position: fixed; bottom: 5px; right: 25px;">
+                <i class="material-icons md-48">arrow_upward</i>
+            </div>
+
             <!--LOGIN-->
             <div id="log" hidden="false">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="">Credenciais</span>
+                        <span class="input-group-text">Credenciais</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Usuário" id="username">
                     <input type="password" class="form-control" placeholder="Senha" id="pswd">
-                    <button class="btn btn-outline-success" onclick="login(username,pswd); set_hidden(log); clearvalue(username); clearvalue(pswd);">
+                    <button class="btn btn-outline-success" onclick="login(username,pswd);">
                         Logar
                     </button>
                 </div>

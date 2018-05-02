@@ -45,7 +45,7 @@ function submit() {
     if (user.length == 0) {
         show(document.getElementById('log'));
         show(document.getElementById('add'));
-        alert('Não existe usuário logado');
+        swal("Error", "Não existe usuário logado", "error");
     } else {
         fetch('http://150.165.85.16:9900/api/msgs', {
             method: 'POST',
@@ -63,7 +63,7 @@ function submit() {
 
 function show(tag) {
     tag.hidden = !tag.hidden;
-    //scroll(tag);
+    // scroll(tag);
 }
 
 function set_hidden(tag){
@@ -85,7 +85,7 @@ function searching(tag) {
         a.author.toLowerCase().indexOf(tag.value.toLowerCase()) != -1
     );
     if (busca.length == 0) {
-        alert('Nenhuma mensagem correspondente foi encontrada');
+        swal("Atenção", "Nenhuma mensagem correspondente foi encontrada", "warning");
     } else {
         update_view(busca);
     }
@@ -98,7 +98,7 @@ function localmessages() {
 
 function remove (tag) {
     if (user.length == 0) {
-        alert('Nenhum usuário logado');
+        swal("Error", "Nenhum usuário logado", "error");
         show(document.getElementById('log'));
     } else {
         const msgs = JSON.stringify({
@@ -108,8 +108,8 @@ function remove (tag) {
             method: 'DELETE',
             body: msgs
         })
-        .then(a => localmessages())
-        .then(a => update_msg());
+        .then(localmessages())
+        .then(update_msg());
         show(document.getElementById('del'));
     }
 }
@@ -134,10 +134,22 @@ function logout() {
 
 function login(username, pswd) {
     if (username.value.length == 0 | pswd.value.length == 0) {
-        alert('Os campos não podem ser vazios');
+        swal("Error", "Os campos não podem ser vazios", "warning");
     } else {
-        user = username.value + ':' + pswd.value;
-        name_view();
-        update_view(localmessages());
+        fetch('http://150.165.85.16:9900/api/frontends')
+        .then(r => r.json())
+        .then(data => { 
+            if (data.indexOf(username.value) != -1) {
+                user = username.value + ':' + pswd.value;
+                name_view();
+                update_view(localmessages());
+
+                set_hidden(log);
+            } else {
+                swal("Error", "Frontend não cadastrado", "error");
+            }
+            clearvalue(username);
+            clearvalue(pswd);
+        });
     }
 }
