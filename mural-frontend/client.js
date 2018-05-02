@@ -1,5 +1,16 @@
-const listagem_view = document.getElementById('listagem');
-const mensagens = [];
+let listagem_view = document.getElementById('listagem');
+let mensagens = [];
+let user = '';
+
+name_view();
+
+function name_view() {
+    if (user.length == 0) {
+        document.getElementById('nameview').innerText = `Login`;
+    } else {
+        document.getElementById('nameview').innerHTML = `Logout`;
+    }
+}
 
 function update_msg() {
     fetch('http://150.165.85.16:9900/api/msgs')
@@ -37,7 +48,8 @@ function submit() {
             title: document.getElementById('subject').value,
             msg: document.getElementById('msg').value, 
             author: document.getElementById('author').value, 
-            credentials:"vjsilva:avengers"})
+            credentials: user
+        })
     })
     .then(dado => dado.json());
     update_msg();
@@ -74,7 +86,12 @@ function searching(tag) {
 }
 
 function localmessages() {
-    return mensagens.filter(a => a.frontend == 'vjsilva');
+    if (user.length == 0) {
+        alert('Nenhum usuário logado');
+    } else {
+        lista = user.split(':');
+        return mensagens.filter(a => a.frontend == lista[0]);
+    }
 }
 
 function remove (tag) {
@@ -82,7 +99,7 @@ function remove (tag) {
         alert('Informe um id');
     } else {   
         const msgs = JSON.stringify({
-            credentials: "vjsilva:avengers"
+            credentials: user
         });
         fetch(`http://150.165.85.16:9900/api/msgs/${tag.value}`, {
             method: 'DELETE',
@@ -102,5 +119,21 @@ function scroll(tag) {
         window._TO=setTimeout(scroll, 20, tag);
     } else {
         window.scrollTo(0, tag.offsetTop);
+    }
+}
+
+function logout() {
+    if (user.length != 0) {
+        user = '';
+    }
+    name_view();
+}
+
+function login(username, pswd) {
+    if (username.value.length == 0 | pswd.value.length == 0) {
+        alert('Os campos não podem ser vazios');
+    } else {
+        user = username.value + ':' + pswd.value;
+        name_view();
     }
 }

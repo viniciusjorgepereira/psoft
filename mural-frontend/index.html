@@ -29,24 +29,42 @@
             <!--MENU-->
             <div class="btn-group" role="group">
                 <button title="Atualizar mensagens" type="button" class="btn btn-success" 
-                onclick="update_msg(); clearvalue(searchInput); clearvalue(deleteInput); set_hidden(add); set_hidden(search); set_hidden(del);">
+                onclick="update_msg(); clearvalue(searchInput); clearvalue(deleteInput); set_hidden(add); set_hidden(search); set_hidden(del); set_hidden(log);">
                     Mensagens
                 </button>
                 <button type="button" class="btn btn-primary" 
-                onclick="show(add); set_hidden(del); set_hidden(search);">
+                onclick="show(add); set_hidden(del); set_hidden(search); set_hidden(log);">
                     Adicionar
                 </button>
                 <button type="button" class="btn btn-secondary" 
-                onclick="show(search); set_hidden(add); set_hidden(del);">
+                onclick="show(search); set_hidden(add); set_hidden(del); set_hidden(log);">
                     Pesquisar
                 </button>
                 <button type="button" class="btn" 
-                onclick="show(del); update_view(localmessages()); set_hidden(add); set_hidden(search);">
+                onclick="show(del); update_view(localmessages()); set_hidden(add); set_hidden(search); set_hidden(log);">
                     Remover
                 </button>
             </div>
+            <button class="btn btn-warning" onclick="show(log); set_hidden(add); set_hidden(del); set_hidden(search); logout();">
+                    <span id="nameview"></span>                
+            </button>
             <br>
             <hr class="my-4">
+
+            <!--LOGIN-->
+            <div id="log" hidden="false">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="">Credenciais</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Usuário" id="username">
+                    <input type="password" class="form-control" placeholder="Senha" id="pswd">
+                    <button class="btn btn-outline-success" onclick="login(username,pswd); set_hidden(log); clearvalue(username); clearvalue(pswd);">
+                        Logar
+                    </button>
+                </div>
+                <hr class="my-4">
+            </div>
 
             <!--ADICIONAR MENSAGEM-->
             <div id="add" hidden="false">
