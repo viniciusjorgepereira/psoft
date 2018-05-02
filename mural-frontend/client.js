@@ -16,7 +16,7 @@ function update_msg() {
     fetch('http://150.165.85.16:9900/api/msgs')
     .then(r => r.json())
     .then(data => { 
-        Object.assign(mensagens, data);
+        Object.assign(mensagens, data.reverse());
         update_view(mensagens);
     });
 }
@@ -42,16 +42,22 @@ function update_view(array) {
 };
 
 function submit() {
-    fetch('http://150.165.85.16:9900/api/msgs', {
-        method: 'POST',
-        body: JSON.stringify({
-            title: document.getElementById('subject').value,
-            msg: document.getElementById('msg').value, 
-            author: document.getElementById('author').value, 
-            credentials: user
+    if (user.length == 0) {
+        show(document.getElementById('log'));
+        show(document.getElementById('add'));
+        alert('Não existe usuário logado');
+    } else {
+        fetch('http://150.165.85.16:9900/api/msgs', {
+            method: 'POST',
+            body: JSON.stringify({
+                title: document.getElementById('subject').value,
+                msg: document.getElementById('msg').value, 
+                author: document.getElementById('author').value, 
+                credentials: user
+            })
         })
-    })
-    .then(dado => dado.json());
+        .then(dado => dado.json());
+    }
     update_msg();
 };
 
@@ -86,18 +92,15 @@ function searching(tag) {
 }
 
 function localmessages() {
-    if (user.length == 0) {
-        alert('Nenhum usuário logado');
-    } else {
-        lista = user.split(':');
-        return mensagens.filter(a => a.frontend == lista[0]);
-    }
+    lista = user.split(':');
+    return mensagens.filter(a => a.frontend == lista[0]);
 }
 
 function remove (tag) {
-    if (tag.value.length == 0) {
-        alert('Informe um id');
-    } else {   
+    if (user.length == 0) {
+        alert('Nenhum usuário logado');
+        show(document.getElementById('log'));
+    } else {
         const msgs = JSON.stringify({
             credentials: user
         });
@@ -105,9 +108,9 @@ function remove (tag) {
             method: 'DELETE',
             body: msgs
         })
-        .then(a => localmessages);
-        update_msg();
-        update_view(localmessages);
+        .then(a => localmessages())
+        .then(a => update_msg());
+        show(document.getElementById('del'));
     }
 }
 
@@ -135,5 +138,6 @@ function login(username, pswd) {
     } else {
         user = username.value + ':' + pswd.value;
         name_view();
+        update_view(localmessages());
     }
 }
