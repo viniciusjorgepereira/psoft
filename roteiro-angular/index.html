@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mural</title>
+	<link rel="stylesheet" type="text/css" href="app.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+</head>
+
+<body ng-app="mural">
+	<div ng-controller="AppCtrl as vm">
+		<img class="home" src="https://media.giphy.com/media/BINqrWVgvdjNe/giphy.gif" alt="5">
+		<h1>Home</h1>
+		<p>Mensagem: {{vm.msg}}</p>
+		<p>comprimento da mensagem: {{vm.msg.length}}</p>
+		<p>Mensagem: </p>
+		<input type="text" ng-model="vm.msg">
+		<br>
+		<br>
+		<br>
+	</div>
+	<hr>
+	<div ng-controller="AppNumericCtrl as vm">
+		<img class="home" src="https://i.gifer.com/VhI.gif" alt="">
+		<h1>Numeric</h1>
+		<h4> {{ vm.title }} </h4>
+		<p> Num: {{ vm.num }} </p>
+		<p> Data: {{ vm.date }} </p>
+		<br>
+		<br>
+	</div>
+	<hr>
+	<div ng-controller="MensagensCtrl as vm">
+		<img class="home" src="http://gifimage.net/wp-content/uploads/2017/11/email-gif-8.gif">
+		<h1>Posts</h1>
+		<p>Número de mensagens: {{vm.mensagens.length}}</p>
+		<div class="msg" ng-repeat="msg in vm.mensagens">
+			<div class="msg-texto">{{ msg.texto[0].toUpperCase() + msg.texto.substr(1) }}</div>
+			<div class="msg-autor">{{ msg.autor[0].toUpperCase() + msg.autor.substr(1)}}</div>
+		</div>
+	</div>
+
+	<!-- Angular JS -->
+	<script src="angular.min.js"></script>
+	<!-- Aplicação -->
+	<script src="app.js"></script>
+	<script src="app-controller.js"></script>
+	<script src="mensagens-controller.js"></script>
+	<script src="mensagens-service.js"></script>
+</body>
+
+</html>
